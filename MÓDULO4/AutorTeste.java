@@ -6,10 +6,12 @@ public class AutorTest {
 
     @Test
     public void testComportamentoAutor() {
-        Autor autor = new Autor("Jessica Felix", "Brasileira");
+        // construtor true = é usuário
+        Autor autor = new Autor("Jessica Felix", "Brasileira", true);
 
         assertEquals("Jessica Felix", autor.getNome());
         assertEquals("Brasileira", autor.getNacionalidade());
+        assertTrue(autor.isAutorUsuario());
 
         Livro livroTec = new Livro("Java", autor, "Tecnologia", true);
         Livro livroFic = new Livro("Harry Potter", autor, "Ficcao", true);
@@ -20,10 +22,7 @@ public class AutorTest {
         assertEquals(1, livrosTecnologia.size());
         assertEquals("Java", livrosTecnologia.get(0).getTitulo());
 
-        autor.setNome("Jessica Alterado");
-        autor.setNacionalidade("Americana");
-        
-        assertEquals("Jessica Alterado", autor.getNome());
-        assertEquals("Americana", autor.getNacionalidade());
+        autor.setAutorUsuario(false);
+        assertFalse(autor.isAutorUsuario());
     }
 }

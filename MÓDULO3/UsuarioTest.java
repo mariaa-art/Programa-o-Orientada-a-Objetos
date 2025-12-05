@@ -4,26 +4,26 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UsuarioTest {
 
     @Test
-    public void testCriacaoUsuario() {
-        Usuario usuario = new Usuario("Gabriel", 21);
-
-        assertEquals("Gabriel", usuario.getNome());
-        assertEquals(21, usuario.getIdade());
-    }
-
-    @Test
-    public void testSetNome() {
+    public void testComportamentoUsuario() {
         Usuario usuario = new Usuario("Lucas", 30);
-        usuario.setNome("Pedro");
 
-        assertEquals("Pedro", usuario.getNome());
-    }
+        assertEquals("Lucas", usuario.getNome());
+        assertEquals(30, usuario.getIdade());
 
-    @Test
-    public void testSetIdade() {
-        Usuario usuario = new Usuario("Lucas", 30);
-        usuario.setIdade(25);
+        assertNotNull(usuario.getHistoricoEmprestimos());
+        assertEquals(0, usuario.getHistoricoEmprestimos().size());
 
-        assertEquals(25, usuario.getIdade());
+        Autor autor = new Autor("Teste", "Teste");
+        Livro livro = new Livro("Teste", autor, "Geral", true);
+        Emprestimo emprestimo = new Emprestimo(livro, usuario);
+
+        assertEquals(1, usuario.getHistoricoEmprestimos().size());
+        assertEquals(emprestimo, usuario.getHistoricoEmprestimos().get(0));
+
+        usuario.setNome("Lucas Silva");
+        usuario.setIdade(31);
+
+        assertEquals("Lucas Silva", usuario.getNome());
+        assertEquals(31, usuario.getIdade());
     }
 }

@@ -1,21 +1,14 @@
-public class Autor {
+import java.util.ArrayList;
+import java.util.List;
 
-    private String nome;
+public class Autor extends Pessoa {
     private String nacionalidade;
-    private boolean isUsuario; // NOVO CAMPO
+    private boolean autorUsuario;
 
-    public Autor(String nome, String nacionalidade, boolean isUsuario) {
-        this.nome = nome;
+    public Autor(String nome, String nacionalidade, boolean autorUsuario) {
+        super(nome);
         this.nacionalidade = nacionalidade;
-        this.isUsuario = isUsuario;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+        this.autorUsuario = autorUsuario;
     }
 
     public String getNacionalidade() {
@@ -26,11 +19,25 @@ public class Autor {
         this.nacionalidade = nacionalidade;
     }
 
-    public boolean isUsuario() {
-        return isUsuario;
+    public boolean isAutorUsuario() {
+        return autorUsuario;
     }
 
-    public void setUsuario(boolean usuario) {
-        isUsuario = usuario;
+    public void setAutorUsuario(boolean autorUsuario) {
+        this.autorUsuario = autorUsuario;
+    }
+
+    public List<Livro> getObrasPublicadas() {
+        return getLivros();
+    }
+
+    public List<Livro> getObrasPublicadasPorGenero(String genero) {
+        List<Livro> obrasFiltradas = new ArrayList<>();
+        for (Livro livro : getLivros()) {
+            if (livro.getGenero().equalsIgnoreCase(genero)) {
+                obrasFiltradas.add(livro);
+            }
+        }
+        return obrasFiltradas;
     }
 }
